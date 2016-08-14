@@ -28,7 +28,6 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 android:text="2.设计蓝牙可见" />
-
             <Button
                 android:id="@+id/btn_search"
                 android:layout_width="fill_parent"

@@ -73,13 +73,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         /**判断手机系统的版本*/
+        Log.d("MainActivity",Build.VERSION.SDK_INT+"");
         if (Build.VERSION.SDK_INT >= 6.0) {//Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-            if(checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
                 /**动态添加权限：ACCESS_FINE_LOCATION*/
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSION_REQUEST_CONSTANT);
             }
         }
+
         initDate();
         setListener();
 
@@ -296,6 +298,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onDestroy();
         unregisterReceiver(mReceiver);
         ButterKnife.unbind(this);
+        if(a2dp!=null){
+            a2dp=null;
+        }
+        if(mProfileServiceListener!=null){
+            mProfileServiceListener=null;
+        }
 
     }
 
